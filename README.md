@@ -22,13 +22,15 @@ For checking whether an input packet matches any rule, the following checks take
 For each (direction, protocol), the following applies to each of the IP and port lookups.<br>
 Let the number of rules be `N`, among which `R` contain ranges such that the total number of affected IPs/ports is `P`.
 
-Looking up in the `HashSet` is O(1) amortized. Storing IPs as Strings in the HashSet helps in utilizing Java's hashCode for Strings and leads to good spread => good performance guarantees. Lookup in the `TreeSet` is [O(log R)](https://docs.oracle.com/javase/7/docs/api/java/util/TreeSet.html).
+Lookup in the `HashSet` is O(1) amortized. Storing IPs as Strings in the HashSet helps in utilizing Java's hashCode for Strings and leads to good spread => good performance guarantees. <br>Lookup in the `TreeSet` is [O(log R)](https://docs.oracle.com/javase/7/docs/api/java/util/TreeSet.html).
 
-* Time Complexity: Best - `O(1)`, Worst - `O(log R)`
+* **Time Complexity:** Best - `O(1)`, Worst - `O(log R)`
 
+<br>
 Storing all possible allowed IPs/ports in a HashSet might potentially allow for O(1) lookups even in the worst case but it would lead to a blow-up in space complexity of O(P), which could be a problem for large R (which is often the case in firewalls) as then, P >> N. Using a TreeSet to store only the ranges does not lead to this problem.
+* **Space Complexity:** `O(N)`<br>
 
-* Space Complexity: `O(N)`<br>
+
 (These are theoretical guarantees; I was unable to perform any performance testing within the time limit to verify them)
 
 ## Possible Improvements
