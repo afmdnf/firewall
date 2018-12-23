@@ -26,9 +26,8 @@ Lookup in the `HashSet` is O(1) amortized. Storing IPs as Strings in the HashSet
 
 * **Time Complexity:** Best - `O(1)`, Worst - `O(log R)`
 
-<br>
 Storing all possible allowed IPs/ports in a HashSet might potentially allow for O(1) lookups even in the worst case but it would lead to a blow-up in space complexity of O(P), which could be a problem for large R (which is often the case in firewalls) as then, P >> N. Using a TreeSet to store only the ranges does not lead to this problem.
-* **Space Complexity:** `O(N)`<br>
+* **Space Complexity:** `O(N)`
 
 
 (These are theoretical guarantees; I was unable to perform any performance testing within the time limit to verify them)
