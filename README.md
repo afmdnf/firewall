@@ -1,7 +1,15 @@
-# Illumio PCE Assignment 2018
+# Firewall
 
-## Testing
-All tests are located in `test/FirewallTest.java`. I used JUnit for testing and each test includes comments about what edge case it tries to cover, in addition to the example tests.
+Host-based default-deny firewall implementation in Java, with a focus on efficiency and compactness.
+
+## Input
+Allowed rules CSV file with columns: direction,protocol,ports,IPaddress
+direction: {'inbound', 'outbound'}
+protocol: {'tcp', 'udp'}
+port: either an integer or a range separated by a dash in [1, 65535]
+IPaddress: IPv4 address in dot notation (either single or range separated by a dash) [0.0.0.0 - 255.255.255.255]
+
+The filename of the CSV file is passed as an argument to the constructor of the `Firewall` class. The method `accept_packet(direction, protocol, port, IP)` returns a boolean representing whether the input packet is to be allowed or not, based on whether it is contained in any of the rules.
 
 ## Implementation Details
 The implementation follows an object-oriented approach with the following classes:
@@ -29,8 +37,8 @@ Lookup in the `HashSet` is O(1) amortized. Storing IPs as Strings in the HashSet
 Storing all possible allowed IPs/ports in a HashSet might potentially allow for O(1) lookups even in the worst case but it would lead to a blow-up in space complexity of O(P), which could be a problem for large R (which is often the case in firewalls) as then, P >> N. Using a TreeSet to store only the ranges does not lead to this problem.
 * **Space Complexity:** `O(N)`
 
-
-(These are theoretical guarantees; I was unable to perform any performance testing within the time limit to verify them)
+## Testing
+All tests are located in `test/FirewallTest.java`. I used JUnit for testing and each test includes comments about what edge case it tries to cover, in addition to the example tests.
 
 ## Possible Improvements
 * Using a LPM (Longest Prefix Match) tree to match IP addresses might reduce the time complexity for the range IP lookup
@@ -38,6 +46,3 @@ Storing all possible allowed IPs/ports in a HashSet might potentially allow for 
 * Extensive testing to verify performance guarantees
 * Multi-threaded check for port/IP
 * Input validation
-
-## Team
-I would be happy to be a part of the ***Platform*** team.
