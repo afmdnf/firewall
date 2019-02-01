@@ -3,11 +3,11 @@
 Host-based default-deny firewall implementation in Java, with a focus on efficiency and compactness.
 
 ## Input
-Allowed rules CSV file with columns: direction,protocol,ports,IPaddress
-direction: {'inbound', 'outbound'}
-protocol: {'tcp', 'udp'}
-port: either an integer or a range separated by a dash in [1, 65535]
-IPaddress: IPv4 address in dot notation (either single or range separated by a dash) [0.0.0.0 - 255.255.255.255]
+Allowed rules CSV file with columns: `direction,protocol,ports,IPaddress`
+* direction: {'inbound', 'outbound'}
+* protocol: {'tcp', 'udp'}
+* port: either an integer or a range separated by a dash in [1, 65535]
+* IPaddress: IPv4 address in dot notation (either single or range separated by a dash) [0.0.0.0 - 255.255.255.255]
 
 The filename of the CSV file is passed as an argument to the constructor of the `Firewall` class. The method `accept_packet(direction, protocol, port, IP)` returns a boolean representing whether the input packet is to be allowed or not, based on whether it is contained in any of the rules.
 
